@@ -1,0 +1,362 @@
+@charset "utf-8";
+
+/*fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/*skip_nav*/
+.skip_nav {}
+.skip_nav a {
+   position: fixed;left: 0;top: -50px;
+   background: yellow;
+}
+.skip_nav a:focus {top: 0;}
+
+/*common*/
+body {
+   font-family: 'Noto Sans', sans-serif;
+   font-family: 'Noto Sans KR', sans-serif;
+   font-size: 16px;color:#333;
+}
+.container {width: 1600px;margin: auto;position: relative;}
+.blind {display: block;width: 1px;height: 1px;overflow: hidden;}
+.clrfix::after {content:"";display: block;clear: both;}
+/*header*/
+header {
+   position: fixed;left: 0;right: 0;top: 0;
+   z-index: 990;height: 60px;
+   color: #FFF;
+   border-bottom: 1px solid #d3d3d3;
+}
+header.on {color: #222;background: #FFF;}
+header h1 {
+   position: absolute;left: 5%;top: 50%;
+   transform: translateY(-50%);
+}
+header h1 a {
+   display: block;
+   width: 140px;height: 20px;
+   background: url(../img/logo_enterprise_w.png);
+   background-size: contain;
+}
+header.on h1 a {
+   background: url(../img/logo_enterprise_b.png);
+   background-size: contain;
+}
+header nav {
+   position: relative;z-index: 1;
+   text-align: center;}
+header nav #gnb {display: inline-block;}
+header nav #gnb>li {
+   position: relative;
+   display: inline-block;vertical-align: top;
+}
+header nav #gnb>li>a {
+   display: block;margin: 0 40px;
+   line-height: 60px;
+}
+header nav #gnb>li>a:hover::after {width: auto;}
+header nav #gnb>li>a::after {
+   content:"";display: block;
+   width: 0;height: 2px;margin-top: -1px;
+   background: #31408d;
+}
+header nav #gnb>li ul {
+   display: none;
+   position: absolute;left: 0;right: 0;top: 60px;
+   padding: 10px 0;z-index: 1;}
+header nav #gnb>li ul li {line-height: 2em;}
+header nav #gnb>li ul li a {font-size: 14px;}
+header nav #gnb>li ul li:hover a {text-decoration: underline;}
+header nav #gnb::after {
+   position: absolute;left: 50%;top: 60px;
+   width: 100vw;
+   transform: translateX(-50%);
+   content:"";display: none;
+   background: #FFF;height: 160px;
+}
+header nav #gnb:hover ul {display: block;}
+header nav #gnb:hover::after {display: block;}
+header nav #gnb .recruit_link {
+   position: absolute;right: 5%;top: 50%;
+   transform: translateY(-50%);
+}
+header nav #gnb .recruit_link::after {
+   content:"";display: block;
+   position: absolute;right: 0;top: 50%;
+   width: 15px;height: 15px;
+   background: url(../img/ico_pc_210115.png) -30px -30px;
+   background-size: 120px auto;
+   transform: translateY(-50%)
+} 
+header nav #gnb .recruit_link>a {margin: 0 25px !important;}
+
+/* 
+header #gnb>li>a:hover::after {width: auto;}
+header #gnb>li:last-child {position: absolute;right: 0;top: 0;}
+header #gnb>li:last-child a {display: block;}
+header #gnb>li:last-child a::after {
+   content:"";display: block;
+   position: absolute;right: 10px;top: 24px;
+   width: 15px;height: 15px;
+   background: url(../img/ico_pc_210115.png) -30px -30px;
+   background-size: 120px auto;
+} */
+
+/*footer*/
+footer {padding: 30px 0;border-top: 1px solid #dadada;}
+footer strong {
+   float: left;display: block;width: 126px;height: 18px;
+   margin: 8px 24px 0 0;
+   background: url(../img/logo_enterprise_b.png);
+   background-size: cover;
+}
+footer .footer_menu {float: left;}
+footer .footer_menu li {
+   float: left;color: #8f8f8f;font-size: 12px;line-height: 34px;
+}
+footer .footer_menu li::after {
+   float: right;content:"";display: block;
+   width: 1px;height: 10px;margin: 12px;
+   background: #dfe0e1;
+}
+footer .footer_menu li:last-child {margin-right: 0px;}
+footer .footer_menu li:last-child::after {display: none;}
+
+footer .family_site_box {
+   float: right;position: relative;
+   border: 1px solid #dadada;
+   font-size: 13px;
+}
+.family_site_box button {
+   width: 134px;height: 32px;padding: 0 15px;
+   text-align: left;line-height: 30px;
+}
+.family_site_box button::after {
+   content:"";float: right;display: block;
+   width: 9px;height: 9px;margin-top: 10px;
+   background-image: url(../img/ico_pc_210115.png);
+   background-size: 120px auto;
+   background-position: -30px -116px;
+}
+.family_site_box button:active::after {
+   transform: rotate(45deg);
+   background-position: -40px -116px;
+}
+/*
+   .family_site_box button::after {
+      content:"";float: right;display: block;
+      width: 9px;height: 9px;
+      background: url(../img/ico_pc_210115.png) -30px -116px;
+      background-size: 120px 200px;
+      transform: translateY(50%);
+   }
+   .family_site_box button:active::after {
+      background-position-x: -40px;
+   }
+   .family_site_box button:active::after {
+      transform: translateY(50%) rotate(45deg);
+   }
+   
+   :active 상황에서 사용한 transform 속성에 rotate() 값만 사용하면
+   세로정렬에서 사용한 translateY()가 생략되어 버림
+   :active 상황에 translateY() 값을 다시 작성하되,
+   위치 잡고 회전해야 하기 때문에 순서에 유념할 것
+*/
+.family_site_box button:active+ul {display: block;}
+
+.family_site_box .family_site_list {
+   display: none;
+   position: absolute;right: 0;bottom: 40px;
+   width: 480px;height: 160px;
+   border: 1px solid #dadada;
+   background: #FFF;
+}
+
+ .family_site_list>li {
+   float: left;width: calc(100% / 3);  
+   /*
+   height: 112px;border-right: 1px solid #dcdcdc;
+   height 값이 정확하지 않고, 내용이 변경되면 숫자값을 다시 계산
+   */
+   margin: 25px 0;
+   box-sizing: border-box;   
+}
+.family_site_list>li+li::after {
+   /*
+      li+li >> 첫째를 제외한 모든 li를 뜻함
+      >> 이렇게 적용안해도 됨
+      .family_site_list>li:first-child::after {display: none;}
+   */
+   content:"";
+   position: absolute;top: 25px;bottom: 25px;
+   display: block;width: 1px;
+   background: #dcdcdc;
+   /*
+      absolute라 하더라도 좌표 값을 설정하지 않으면 static한 위치에 position 됨
+      세로 좌표인 top, bottom은 position이 사용된 조부모 ul 기준으로 배치가 되지만, 
+      가로(좌우)좌표는 선언하지 않아서 직접 부모인 li 기준에 배치가 됨
+      >> 부모인 li의 padding값은 무시하고 컨텐츠 영역에서 시작됨
+      >> 2depth ul과 구분선이 떨어지려면 span과 ul에게 각각 여백을 선언해야함 
+         (부모인 li의 padding을 빼주고 자손들에게 각각 padding값을 따로 적용해야 함)
+   */
+}
+
+.family_site_list>li span {padding: 0 20px;font-weight: 600;}
+.family_site_list ul {padding: 0 20px;}
+.family_site_list ul li {
+   margin-top: 20px;color:#8f8f8f;font-weight: 600;
+}
+
+/*.family_site end*/
+footer ul.sns_link {float: right;margin-right: 30px;}
+footer ul.sns_link li {float: left;margin-left: 20px;}
+footer ul.sns_link li a {
+   display: block;
+   width: 20px;height: 20px;margin-top: 7px;
+   background-image: url(../img/ico_pc_210115.png);
+   /*
+   # background 속성은 축약형으로 배경과 관련된 모든 속성을 사용한다는 뜻
+   - background-color : transparency;
+   - background-repeat : repeat;
+   - background-image : none;
+   - background-position : 0 0;
+   - background-attachment : scroll;
+   - background-size : 100%
+
+   - background: red; 
+   - color: red;
+   - repeat: repeat;
+   - image: none;
+   - position: 0 0;
+   - attachment: scroll;
+   - size: 100%
+
+   ## 스프라이트 사용 시 여러 선택자로 포지션을 나눠야 하는 경우
+      축약형 사용 금지
+
+
+      * vertical-align : 글자와 한 줄에 표시되는 "inline-block"요소에게 사용
+
+      - 일반적으로 inline-block요소는 글자보다 높이가 높은 경우
+      - default는 baseline인 속성 값으로 정렬됨
+      - 높이가 다른 inline-block요소들을 위쪽 기준으로 바꾸려면 >> vertical-align: top;
+
+      * float을 사용한 높이가 다른 block요소는 위쪽을 기준으로 한 줄 정렬
+   */
+   background-size: 120px auto;/*240,400*/
+   /*background-position: -196px -265px;*/
+}
+/* footer ul.sns_link li:first-child a{
+   width: 20px;height: 20px;
+   background-position: -98px -132px;
+}
+footer ul.sns_link li:first-child a:hover {
+   width: 20px;height: 20px;
+   background-position: -98px -156px;
+}
+footer ul.sns_link li:nth-child(2) a {
+   width: 22px;height: 16px;margin-top: 3px;
+   background-position: -73px -134px;
+}
+footer ul.sns_link li:nth-child(2) a:hover {
+   width: 22px;height: 16px;margin-top: 3px;
+   background-position: -73px -158px;
+}
+footer ul.sns_link li:nth-child(3) a {
+   width: 20px;height: 20px;
+   background-position: -50px -132px;
+}
+footer ul.sns_link li:nth-child(3) a:hover {
+   width: 20px;height: 20px;
+   background-position: -50px -156px;
+}
+footer ul.sns_link li:nth-child(4) a {
+   width: 20px;height: 20px;
+   background-position: -26px -132px;
+}
+footer ul.sns_link li:nth-child(4) a:hover {
+   width: 20px;height: 20px;
+   background-position: -26px -156px;
+}
+footer ul.sns_link li:nth-child(5) a{
+   width: 19px;height: 20px;
+   background-position: -3px -1132px;
+}
+footer ul.sns_link li:nth-child(5) a:hover {
+   width: 19px;height: 20px;
+   background-position: -3px -156px;
+} */
+
+footer ul.sns_link li:nth-child(1) a {background-position: -2px -132px;}
+footer ul.sns_link li:nth-child(2) a {background-position: -26px -132px;}
+footer ul.sns_link li:nth-child(3) a {background-position: -50px -132px;}
+footer ul.sns_link li:nth-child(4) a {width: 21px;background-position: -73px -132px;}
+footer ul.sns_link li:nth-child(5) a {background-position: -98px -132px;}
+
+footer ul.sns_link li a:hover {background-position-y: -156px;}
+
+/*main*/
+main {margin-bottom: 150px;}
+/*index - Main - visual_wrap*/
+main .main_visual_wrap {
+   position: relative;
+   height: 760px;
+   overflow: hidden;
+}
+main .main_visual_wrap video {position: relative;width: 100%;min-width: 1600px;}
+main .main_visual_wrap ul {}
+main .main_visual_wrap li {
+   position: absolute;left: 50%;top: 50%;
+   display: none;width: 1600px;
+   transform: translate(-800px, -50%);
+   color:#FFF;
+}
+main .main_visual_wrap li:nth-child(1) {display: block;}
+main .main_visual_wrap li span {
+   display: block;font-size: 36px;
+}
+main .main_visual_wrap li strong {
+   display: block;font-size: 200px;font-weight: 700;
+   white-space: nowrap;
+}
+main .main_visual_wrap .img_txt img {width: 1600px;}
+main .main_visual_wrap .img_logo {text-align: center;}
+main .main_visual_wrap .img_logo img {height: 400px;margin: auto;}
+/*index - main - contents_wrap*/
+main .contents_wrap {padding-top: 56px;margin-left: 1px;}
+main .contents_wrap section {
+   float: left;width: 506px;margin-right: 40px;
+}
+main .contents_wrap section:nth-child(3n) {margin-right: 0;}
+main .contents_wrap section a {display: block;}
+
+main .contents_wrap .content_1 {}
+main .contents_wrap .content_1 h2 {
+   margin-bottom: 14px;color: #777;font-size: 14px;font-weight: 800;
+}
+main .contents_wrap .news {}
+main .contents_wrap .news strong {display: block;margin-bottom: 8px;}
+main .contents_wrap .news strong , 
+main .contents_wrap .partner p {font-size: 20px;font-weight: 600;line-height: 1.6em;}
+main .contents_wrap .news p {color: #777;font-size: 15px;line-height: 1.7em;}
+main .contents_wrap .company {}
+main .contents_wrap .company p {margin-bottom: 24px;}
+main .contents_wrap .company em {display: block;margin-bottom: 8px;font-size: 30px;font-weight: 800;}
+main .contents_wrap .company span {
+   display: block;font-size: 14px;color: #555;font-weight: 500;
+}
+main .contents_wrap .company .space {display: inline-block;width: 40px;}
+
+main .contents_wrap .partner {}
+
+main .contents_wrap .content_2 {}
+main .contents_wrap .content_2 section {margin-top: 50px;}
+main .contents_wrap .content_2 img {width: 100%;margin-bottom: 16px;}
+main .contents_wrap .content_2 h2 {
+   font-size: 22px;font-weight: 700;
+   line-height: 2.4em;
+}
+main .contents_wrap .content_2 p {
+   color: #777;   
+   font-size: 15px;line-height: 1.7em;
+}
