@@ -1,0 +1,550 @@
+@charset "UTF-8";
+
+/*Fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+/*font-family: 'Open Sans', sans-serif;*/
+@font-face {
+  font-family: 'NanumBarunGothic';
+  src: local(NanumBarunGothic);
+  src: url("../font/NanumBarunGothic.eot");
+  src: url("../font/NanumBarunGothic.woff") format("woff"), url("../font/NanumBarunGothic.otf") format("opentype");
+}
+
+@font-face {
+  font-family: 'NanumSquare-L';
+  src: local(NanumSquareOTFLight);
+  src: url("../font/NanumSquareOTFLight.eot");
+  src: url("../font/NanumSquareOTFLight.woff") format("woff"), url("../font/NanumSquareOTFLight.otf") format("opentype");
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  src: local(NanumSquareOTFRegular);
+  src: url("../font/NanumSquareOTFRegular.eot");
+  src: url("../font/NanumSquareOTFRegular.woff") format("woff"), url("../font/NanumSquareOTFRegular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: 'NanumSquare-B';
+  src: local(NanumSquareOTFBold);
+  src: url("../font/NanumSquareOTFBold.eot");
+  src: url("../font/NanumSquareOTFBold.woff") format("woff"), url("../font/NanumSquareOTFBold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: 'NanumSquare-EB';
+  src: local(NanumSquareOTFExtraBold);
+  src: url("../font/NanumSquareOTFExtraBold.eot");
+  src: url("../font/NanumSquareOTFExtraBold.woff") format("woff"), url("../font/NanumSquareOTFExtraBold.otf") format("opentype");
+}
+/*사용하기 위한 준비이지 사용된 것은 아님*/
+
+/*common*/
+:root {
+  --green : #1ec545;
+}
+body {
+  font-family: 
+  'Open Sans', 'NanumSquare-L', 'NanumSquare', 
+  'NanumSquare-B', 'NanumSquare-EB', 'NanumBarunGothic', '맑은 고딕', 'AppleSDGothicNeo', sans-serif;
+  font-size: 14px;color: #333;font-weight: 400;
+}
+/*여기서 font-family로 적용해줘야 사용되는 것*/
+.container {width: 1600px;margin: auto;position: relative;}
+.sub_container {width: 1120px;margin: auto;}
+.blind {display: block;width: 1px;height: 1px;overflow: hidden;}
+.container::after {content:'';display: block;clear: both;}
+.clrfix::after {content:'';display: block;clear: both;}
+
+/*Skip_nav*/
+.skip_nav {}
+.skip_nav a {
+  position: fixed;left: 50%;top: -50%;transform: translateX(-50%);
+  background: green;color:#FFF;padding: 15px 25px;
+}
+.skip_nav a:focus {top: 0;}
+
+#wrap {
+  min-width: 1120px;
+  min-height: 100%;
+}
+
+/*header*/
+header {height: 80px;}
+header h1 {float: left;margin-top: 32px;}
+header h1 a {
+  display: block;
+  width: 87px;height: 17px;
+  /* margin: 30px 20px; */
+  background: url(../img/common/header_logo.png);
+}
+header .language {
+  float: right;margin-right: 65px;font-size: 12px;
+}
+.language a {
+  display: block;float: left;
+  color:#878890;line-height: 80px;
+}
+.language .current_lang {color: #212121;}
+.language .current_lang::after {
+  float: right;content:"";display: block;
+  width: 1px;height: 10px;
+  margin: 35px 7px;/*header 중앙에 위치하기 위해 80px-10px/2*/
+  background: #848484;
+}
+/*
+.language a {display: block;position: relative;float: left;}
+.language .current_lang {padding-right: 24px;color: #212121;}
+.language .current_lang::after {
+  content:"";display: block;
+  width: 1px;height: 10px;
+  position: absolute;right: 12px;top: 35px; >> header {height: 80px;}에 맞추기 위해 top: 35px;
+  background: #848484;
+}
+  after 가상클래스에 position으로 위치지정하는 방법
+*/
+header .sitemap_box {
+  position: absolute;right: 0;top: 33px;
+  height: 14px;
+}
+header .sitemap_box .sitemap_btn {
+  position: relative;
+  width: 24px;height: 14px;
+}
+.sitemap_btn span {
+  position: absolute;left: 0;
+  display: block;width: 14px;height: 2px;
+  background: #333;
+}
+.sitemap_box .sitemap_btn span.bar_t {top: 0;}
+.sitemap_box .sitemap_btn span.bar_m {top: 50%;transform: translateY(-50%)}
+.sitemap_box .sitemap_btn span.bar_b {bottom: 0;}
+/* .sitemap_box .sitemap_btn:hover .bar_t {transform: skewY(60deg);}
+.sitemap_box .sitemap_btn:hover .bar_m {display: none;}
+.sitemap_box .sitemap_btn:hover .bar_b {transform: skewY(-60deg);} */
+
+
+header nav {text-align: center;}
+header #gnb {display: inline-block;}
+/*
+  *요소를 가운데 정렬하는 방법 중에는 position을 이용하는 방법
+  header #gnb {
+  position: absolute;left: 50%;transform: translateX(-50%);width: 1200px;}
+  ** position의 left: 50%;는 부모 기준/ transform: translateX(-50%);는 자신 기준
+  >> width가 넓을 때 position을 적용하면 면적이 브라우저 밖으로 넘치는데 이것을 translateX()처리 해도 이미 나간 면적을 다시 가져오지 못하는 문제가 발생함
+  >> position의 left: 50%;속성이 면적을 차지하기 때문에 부모의 크기가 변동되는 반응형에서 부모보다 커지는 상황이 발생할 수 있음.
+*/
+header #gnb>li {display: inline-block;}
+header #gnb>li>a {display: block;margin: 0 30px;line-height: 80px;}
+/*gnb 1depth에 커서를 올렸을 때 텍스트뿐만 아니라 여백에도 링크가 걸리게 하기 위해 a를 block처리 하고 line-height를 준다*/
+
+/*header end*/
+
+/*footer*/
+footer {padding: 70px 0;background: #F8F9FA;}
+footer strong {
+  display: block;float: left;
+  width: 63px;height: 14px;margin-right: 22px;
+  background: url(../img/common/footer_logo.png) no-repeat center bottom;
+}
+
+footer .footer_menu {float: left;color: #888;}
+footer .footer_menu li {
+  float: left;height: 14px;font-size: 14px;
+}
+footer .footer_menu li::after {/*li의 막내자손, a의 동생*/
+  float: right;content:"";display: block;
+  width: 1px;height: 12px;margin: 1px 6px;
+  background: #dfe0e1;
+}
+footer .footer_menu li:last-child::after {display: none;}
+footer .footer_bold {margin-right: 0;font-weight: 600;}
+/*//.footer_menu end*/
+
+footer .family_box {float: right;position: relative;}
+footer .family_box button {
+  position: relative;width: 120px;box-sizing: border-box;
+  font-size: 14px;line-height: 16px;text-align: left;
+}
+footer .family_box button::after {
+  content:"";display: block;
+  /*float: right;*/
+  position: absolute;right: 0;top: 0;
+  width: 16px;height: 16px;
+  background: url(../img/common/sprite.png) -222px -26px;
+  /* background-position: -222px -26px; */
+}
+footer .family_box button:active+ul {display: block;}
+footer .family_box ul {
+  position: absolute;right: 0;bottom: 0;
+  display: none;padding: 20px 0;
+  border: 1px solid #dedfe0;background: #FFF;
+  color: #878890;font-size: 14px;
+}
+.family_list li {margin: 10px 0;}
+.family_list a {
+  display: block;
+  width: 150px;height: 18px;
+  padding: 0 24px;line-height: 18px;
+}
+.family_list a:hover {color: var(--green);}
+.family_list a:hover::after {
+  content:"";display: inline-block;
+  width: 18px;height: 18px;margin-left: 8px;
+  background: url(../img/common/sprite.png) -104px -68px;
+  vertical-align: middle;
+}
+/*//.family_box end*/
+footer .copyright {
+  height: 16px;
+  background: url(../img/common/footer_copy.png) no-repeat center;
+}
+/*footer end*/
+/*Main - index*/
+/*Main - index - main visual*/
+.main_visual_wrap {margin-bottom: 50px;}
+
+/*Main - Index - content_section*/
+.content_section_wrap {
+  background: pink;margin: 50px 0;
+  
+}
+.content_section_wrap .cont_section {
+  
+}
+
+.content_section_wrap .cont_section.news {
+
+}
+.content_section_wrap .cont_section.account {
+}
+
+
+/*Main - index - serive*/
+.service_wrap {margin-bottom: 50px;}
+.service_wrap ul {}
+.service_wrap li {
+  float: left;width: 533px;height: 400px;
+}
+.service_wrap li:nth-child(1) {background: url(../img/main/img_main_content13.png);}
+.service_wrap li:nth-child(2) {background: url(../img/main/img_main_content14.png);}
+.service_wrap li:nth-child(3) {background: url(../img/main/img_main_content15.png);}
+.service_wrap li:nth-child(4) {background: url(../img/main/img_main_content4.png);}
+.service_wrap li:nth-child(5) {background: url(../img/main/img_main_content5.png);}
+.service_wrap li:nth-child(6) {background: url(../img/main/img_main_content16.png);}
+.service_wrap li:nth-child(7) {background: url(../img/main/img_main_content7.png);}
+.service_wrap li:nth-child(8) {background: url(../img/main/img_main_content8.png);}
+.service_wrap li:nth-child(9) {background: url(../img/main/img_main_content17.png);}
+.service_wrap li:hover a {background: rgba(0,0,0,0.3);}
+.service_wrap a:hover .svc_name {opacity: 1;bottom: 30px;}
+.service_wrap li a {
+  display: block;position: relative;
+  transition: background 0.3s;
+  height: 100%;
+  background: rgba(0,0,0,0);
+  color: #FFF;overflow: hidden;
+}
+.service_wrap .svc_name {
+  display: block;
+  position: absolute;left: 30px;bottom: -120px;
+  opacity: 0;
+  transition: opacity 0.5s,bottom 0.5s;
+}
+.service_wrap .svc_name::before {
+  content:"";display: block;
+  width: 23px;height: 23px;margin-bottom: 30px;
+  background: url(../img/common/sprite.png) -199px -129px;
+}
+.service_wrap .svc_name strong {
+  display: block;margin-bottom: 12px;
+  font-size: 22px;font-weight: bold;
+}
+.service_wrap .svc_name span {}
+
+/*Main - Index - platform*/
+.platform_wrap {
+  padding: 90px 0;text-align: center;
+}
+.platform_wrap h2 {
+  margin-bottom: 26px;  
+  font-family: 'NanumSquare-B';font-size: 32px;
+}
+.platform_wrap>p {
+  margin-bottom: 140px;line-height: 1.5em;
+  font-size: 18px;font-weight: 600;
+}
+.platform_wrap ul {width: 1380px;margin: auto;}
+.platform_wrap li {
+  float: left;width: 25%;
+  border-right: 1px solid #eaeaea;box-sizing: border-box;
+}
+.platform_wrap li:last-child {border-right: none;}
+.platform_wrap li a {display: block;}
+.platform_wrap a:hover strong {text-decoration: underline;}
+.platform_wrap li a::before {
+  content:"";display: inline-block;
+  height: 100px;margin-bottom: 40px;
+  background-image: url(../img/common/sprite.png);
+  background-position-y: -957px;
+}
+.platform_wrap li:nth-child(1) a::before {
+  width: 87px;
+  background-position-x: 0;
+}
+.platform_wrap li:nth-child(2) a::before {
+  width: 101px;
+  background-position-x: -92px;
+} 
+.platform_wrap li:nth-child(3) a::before {
+  width: 110px;
+  background-position-x: -200px;
+}
+.platform_wrap li:nth-child(4) a::before {
+  width: 94px;
+  background-position-x: -316px;
+}
+.platform_wrap li strong {
+  display: block;margin-bottom: 16px;
+  color: var(--green);font-size: 16px;font-weight: 600;
+}
+.platform_wrap li p {
+  color: #848484;line-height: 1.6em;
+  font-size: 15px;font-weight: 600;
+}
+
+/*main - Sub*/
+#main {}
+#main .location_wrap {}
+#main .location_wrap ol {}
+#main .location_wrap li {
+  float: left;position: relative;padding-right: 25px;
+  color: #212121;font-size: 12px;
+}
+#main .location_wrap li::after {
+  content:"";display: block; 
+  width: 5px;height: 7px;
+  /*float: right;margin: 3px 10px 2px 10px;*/
+  position: absolute;right: 10px;top: 3px;
+  background: url(../img/common/sprite.png);
+  background-position: -103px 0;
+}
+#main .location_wrap li:last-child::after {display: none;}
+#main .location_wrap li a {color: #878890;}
+#main .location_wrap li a:hover {text-decoration: underline;}
+/*.location_wrap end*/
+
+
+#main .page_title_wrap {text-align: center;padding-top: 50px;}
+#main .page_title_wrap h2 {
+  margin-bottom: 46px;
+  color: #212121;font-size: 42px;font-weight: 700;
+  letter-spacing: -2px;
+}
+#main .page_title_wrap p {
+  line-height: 33px;font-size: 20px;
+  margin-bottom: 26px;
+}
+#main .page_title_wrap img {width: 100%;}
+/*.page_title_wrap end*/
+
+main .main_contents_wrap {padding: 60px 0;}
+.contents_box {
+  overflow: hidden;margin-bottom: 60px;
+}
+.content_left {
+  float: left;width: 260px;
+  font-size: 20px;font-weight: 700;
+  line-height: 30px;
+}
+.content_right {
+  float: left;width: 860px;padding-top: 30px;
+  border-top: 2px solid #333;
+  font-size: 16px;line-height: 26px;color: #606167;
+}
+.content_right li {
+  float: left;width: 390px;margin-bottom: 50px;
+}
+.content_right li:nth-child(2n) {margin-left: 80px;}
+.content_right a {position: relative;display: block;padding-left: 88px;}
+.content_right a::before {
+  content:"";display: block;
+  position: absolute;left: 0;top: 50%;transform: translateY(-50%); 
+}
+.content_right.devel a::before {
+  background-image: url(../img/common/sprite.png);
+}
+.content_right .d1 a::before {
+  width: 74px;height: 20px;background-position: -205px -514px;
+}
+.content_right .d2 a::before {
+  width: 58px;height: 47px;background-position: -70px -562px;
+}
+.content_right .d3 a::before {
+  width: 58px;height: 37px;background-position: -141px -559px;
+}
+.content_right .d4 a::before {
+  width: 60px;height: 60px;background-position: -206px -544px;
+}
+.content_right.api a::before {
+  background-image: url(../img/service/sp_service.png);
+}
+.content_right .api1 a::before {
+  width: 60px;height: 60px;background-position: 0 -515px;
+}
+.content_right .api2 a::before {
+  width: 49px;height: 63px;background-position: -86px -486px;
+}
+.content_right .api3 a::before {
+  width: 66px;height: 57px;background-position: -85px -423px;
+}
+.content_right .api4 a::before {
+  width: 60px;height: 60px;background-position: -85px -58px;
+}
+.content_right .it1 a::before {
+  float: left;display: block;
+  width: 66px;height: 51px;
+  background-image: url(../img/common/sprite.png);
+  background-position: 0 -344px;
+}
+.content_right .it2 a::before {
+  float: left;display: block;
+  width: 67px;height: 53px;
+  background-image: url(../img/service/sp_service.png);
+  background-position: -84px 0;
+}
+.content_right .it3 a::before {
+  float: left;display: block;
+  width: 62px;height: 72px;
+  background-image: url(../img/common/sprite.png);
+  background-position: 0 -450px;
+}
+.content_right .it4 a::before {
+  float: left;display: block;
+  width: 58px;height: 62px;
+  background-image: url(../img/common/sprite.png);
+  background-position: -68px -365px;
+}
+.content_right .it5 a::before {
+  float: left;display: block;
+  width: 56px;height: 56px;
+  background-image: url(../img/common/sprite.png);
+  background-position: -68px -432px;
+}
+.content_right .it6 a::before {
+  float: left;display: block;
+  width: 70px;height: 34px;
+  background-image: url(../img/common/sprite.png);
+  background-position: -128px -406px;
+}
+.content_right .it7 a::before {
+  float: left;display: block;
+  width: 60px;height: 60px;
+  background-image: url(../img/service/sp_service.png);
+  background-position: -85px -58px;
+}
+.content_right .it8 a::before {
+  float: left;display: block;
+  width: 57px;height: 64px;
+  background-image: url(../img/common/sprite.png);
+  background-position: -201px -409px;
+}
+.content_right .it9 a::before {
+  float: left;display: block;
+  width: 66px;height: 55px;
+  background-image: url(../img/common/sprite.png);
+  background-position: -264px -409px;
+}
+.content_right .it10 a::before {
+  float: left;display: block;
+  width: 63px;height: 63px;
+  background-image: url(../img/common/sprite.png);
+  background-position: -331px -803px;
+}
+.content_right .biz1 a::before {
+  float: left;display: block;
+  width: 60px;height: 60px;
+  background-image: url(../img/service/sp_service.png);
+  background-position: -85px -123px;
+}
+.content_right .biz2 a::before {
+  float: left;display: block;
+  width: 68px;height: 43px;
+  background-image: url(../img/common/sprite.png);
+  background-position: -394px -323px;
+}
+.content_right .ad1 a::before {
+  float: left;display: block;
+  width: 62px;height: 51px;
+  background-image: url(../img/common/sprite.png);
+  background-position: -395px -369px;
+}
+.content_right .ad2 a::before {
+  float: left;display: block;
+  width: 64px;height: 52px;
+  background-image: url(../img/service/sp_service.png);
+  background-position: -85px -186px;
+}
+.content_right .square1 a::before {
+  float: left;display: block;
+  width: 61px;height: 61px;
+  background-image: url(../img/common/sprite.png);
+  background-position: -130px -808px;
+}
+.content_right .square2 a::before {
+  float: left;display: block;
+  width: 61px;height: 61px;
+  background-image: url(../img/common/sprite.png);
+  background-position: -130px -808px;
+}
+.content_right .square3 a::before {
+  float: left;display: block;
+  width: 61px;height: 61px;
+  background-image: url(../img/common/sprite.png);
+  background-position: -130px -808px;
+}
+.content_right .square4 a::before {
+  float: left;display: block;
+  width: 61px;height: 61px;
+  background-image: url(../img/common/sprite.png);
+  background-position: -130px -808px;
+}
+.content_right .square5 a::before {
+  float: left;display: block;
+  width: 61px;height: 61px;
+  background-image: url(../img/common/sprite.png);
+  background-position: -130px -808px;
+}
+.content_right .square6 a::before {
+  float: left;display: block;
+  width: 63px;height: 20px;
+  background-image: url(../img/service/sp_business.png);
+  background-position: 0 0;
+}
+
+.content_right p {font-size: 14px;}
+
+.content_right.type2 {padding-top: 0;border: none;}
+
+.contents_box .btn_link {
+  display: block;margin-bottom: 10px;height: 21px;line-height: 21px;
+  color: #212121;font-size: 16px;font-weight: 700;
+}
+.contents_box .btn_link::after {
+  content:"";
+  display: inline-block;
+  width: 18px;height: 18px;
+  background: url(../img/common/sprite.png) -59px 0;
+  vertical-align: middle;margin-left: 12px;
+}
+.contents_box a:hover .btn_link {text-decoration: underline;}
+.contents_box a:hover .btn_link::after {
+  content:"";
+  display: inline-block;
+  width: 18px;height: 18px;
+  background: url(../img/common/sprite.png) -104px -68px;
+  vertical-align: middle;margin-left: 12px;
+}
+/*.contents_box end*/
+
+
